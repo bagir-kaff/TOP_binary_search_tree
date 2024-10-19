@@ -14,6 +14,7 @@ class Tree
     node = Node.new(array[mid])
     node.left = build_tree(array,start,mid-1)
     node.right = build_tree(array,mid+1,ending)
+    self.root = node
     return node
   end
 
