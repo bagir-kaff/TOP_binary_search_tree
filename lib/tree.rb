@@ -3,6 +3,7 @@ class Tree
   attr_accessor :array, :root
 
   def initialize(array)
+    @root = nil
     @array = array
   end
 
@@ -23,10 +24,13 @@ class Tree
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
     pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
   end
+
+  def insert(current_node = root, data)
+  end
+
 end
 
-# array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
-# pohon = Tree.new(array)
-# pohon.root = pohon.build_tree(array)
-# # p pohon.root
-# pohon.pretty_print
+array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
+pohon = Tree.new(array)
+pohon.root = pohon.build_tree(array)
+pohon.pretty_print
