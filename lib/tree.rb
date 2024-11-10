@@ -46,4 +46,6 @@ class Tree
     return current_node
   end
 
+  def delete(data)
+  end
 end
