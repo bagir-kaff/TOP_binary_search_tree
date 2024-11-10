@@ -33,16 +33,16 @@ class Tree
 
   def insert(data, current_node = @root)
 
-    return Node.new(data)  if current_node == nil
+    return Node.new(data)  if current_node == nil #if reaches nil or if root or tree is nil
 
     return data  if current_node == data #for duplicates
 
-    if data < current_node.data
+    if data < current_node.data #visit node with smaller value
       current_node.left = insert(data, current_node.left)
-    elsif data > current_node.data
+    elsif data > current_node.data #visit node with bigger value
       current_node.right = insert(data, current_node.right)
     end
-
+    #puts back the subtree
     return current_node
   end
 
