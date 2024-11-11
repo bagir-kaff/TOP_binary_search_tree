@@ -67,6 +67,15 @@ class Tree
     return current_node
   end
 
-  def find()
+  def find(value, curr = @root) #returns node
+    if curr.nil?
+      return nil
+    elsif value > curr.data
+      return find(value, curr.right)
+    elsif value < curr.data
+      return find(value, curr.left)
+    else
+      return curr
+    end
   end
 end
