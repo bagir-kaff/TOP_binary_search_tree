@@ -67,4 +67,6 @@ class Tree
     return current_node
   end
 
+  def find()
+  end
 end
