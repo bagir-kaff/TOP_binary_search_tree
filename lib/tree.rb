@@ -46,6 +46,25 @@ class Tree
     return current_node
   end
 
-  def delete(data)
+  def delete(data, current_node = @root)
+    return nil if current_node == nil #if it reaches the end (nil), return nil, stays the same
+
+    if data < current_node.data
+      current_node.left = delete(data, current_node.left)
+    elsif data > current_node.data
+      current_node.right = delete(data, current_node.right)
+    else
+      if current_node.right.nil? #if current node has no children or only left children
+        return current_node.left
+      elsif current_node.left.nil? #if current node has only right children
+        return current_node.right
+      else
+        successor = current_node.get_successor
+        current_node.data = successor.data
+        current_node.right = delete(successor.data, current_node.right)
+      end
+    end
+    return current_node
   end
+
 end
