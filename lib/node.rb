@@ -7,7 +7,7 @@ class Node
     @right = nil
   end
 
-  def get_successor
+  def get_successor #helps delete method in Tree
     curr = self.right
     while curr.left != nil
       curr = curr.left

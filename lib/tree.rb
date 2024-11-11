@@ -46,7 +46,7 @@ class Tree
     return current_node
   end
 
-  def delete(data, current_node = @root)
+  def delete(data, current_node = @root) #complete
     return nil if current_node == nil #if it reaches the end (nil), return nil, stays the same
 
     if data < current_node.data
