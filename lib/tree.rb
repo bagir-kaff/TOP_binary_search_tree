@@ -8,14 +8,13 @@ class Tree
     @array = array
   end
 
-  def build_tree(array,start=0,ending=array.uniq.sort.length - 1)
+  def build_tree(arr=@array, start=0, ending=array.uniq.sort.length - 1)
     return nil if start > ending
-
-    array = array.uniq.sort
+    arr = arr.uniq.sort
     mid = (start+ending)/2
-    node = Node.new(array[mid])
-    node.left = build_tree(array,start,mid-1)
-    node.right = build_tree(array,mid+1,ending)
+    node = Node.new(arr[mid])
+    node.left = build_tree(arr,start,mid-1)
+    node.right = build_tree(arr,mid+1,ending)
     self.root = node
     return node
   end
