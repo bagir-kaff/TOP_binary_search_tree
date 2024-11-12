@@ -77,4 +77,17 @@ class Tree
       return curr
     end
   end
+
+  def iter_level_order(root = @root)
+    queue = []
+    arr = []
+    return [] if root.nil?
+    queue.push(root)
+    while queue.any?
+      queue.push(queue[0].left)if queue[0].left != nil
+      queue.push(queue[0].right)if queue[0].right != nil
+      arr<<queue.shift.data
+    end
+    return arr
+  end
 end
