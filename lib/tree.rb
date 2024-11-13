@@ -88,6 +88,11 @@ class Tree
       queue.push(queue[0].right)if queue[0].right != nil
       arr<<queue.shift.data
     end
-    return arr
+
+    if block_given?
+      yield arr
+    else
+      return arr
+    end
   end
 end
