@@ -8,14 +8,13 @@ class Tree
     @array = array
   end
 
-  def build_tree(array,start=0,ending=array.uniq.sort.length - 1)
+  def build_tree(arr=@array, start=0, ending=array.uniq.sort.length - 1)
     return nil if start > ending
-
-    array = array.uniq.sort
+    arr = arr.uniq.sort
     mid = (start+ending)/2
-    node = Node.new(array[mid])
-    node.left = build_tree(array,start,mid-1)
-    node.right = build_tree(array,mid+1,ending)
+    node = Node.new(arr[mid])
+    node.left = build_tree(arr,start,mid-1)
+    node.right = build_tree(arr,mid+1,ending)
     self.root = node
     return node
   end
@@ -76,6 +75,43 @@ class Tree
       return find(value, curr.left)
     else
       return curr
+    end
+  end
+
+  def iter_level_order(root = @root)
+    queue = []
+    arr = []
+    return [] if root.nil?
+    queue.push(root)
+    while queue.any?
+      queue.push(queue[0].left)if queue[0].left != nil
+      queue.push(queue[0].right)if queue[0].right != nil
+      arr<<queue.shift.data
+    end
+
+    if block_given?
+      yield arr
+    else
+      return arr
+    end
+  end
+
+  def recu_level_order(curr=@root, queue = [], arr = [], add_root = true)
+    queue.push(curr) if add_root #execute once
+
+    if queue.empty?
+      if block_given?
+        yield arr
+      else
+        return arr
+      end
+    else
+      queue.push(queue[0].left) unless queue[0].left.nil?
+      queue.push(queue[0].right) unless queue[0].right.nil?
+      # p queue.collect{|x| x.data unless x.nil? }
+      arr<<queue.shift.data
+      # puts "arr = #{arr}"
+      return recu_level_order(curr, queue, arr, false)
     end
   end
 end
