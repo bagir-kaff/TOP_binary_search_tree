@@ -95,4 +95,17 @@ class Tree
       return arr
     end
   end
+
+  def recu_level_order(curr=@root, queue = [], arr = [], add_root = true)
+    queue.push(curr) if add_root #execute once
+
+    return arr if queue.empty?
+
+    queue.push(queue[0].left) unless queue[0].left.nil?
+    queue.push(queue[0].right) unless queue[0].right.nil?
+    # p queue.collect{|x| x.data unless x.nil? }
+    arr<<queue.shift.data
+    # puts "arr = #{arr}"
+    return recu_level_order(curr, queue, arr, false)
+  end
 end
