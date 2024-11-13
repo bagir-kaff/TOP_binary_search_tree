@@ -86,13 +86,13 @@ class Tree
     while queue.any?
       queue.push(queue[0].left)if queue[0].left != nil
       queue.push(queue[0].right)if queue[0].right != nil
-      arr<<queue.shift.data
+      arr<<queue.shift
     end
 
     if block_given?
       yield arr
     else
-      return arr
+      return arr.collect{|x| x.data}
     end
   end
 
@@ -103,13 +103,13 @@ class Tree
       if block_given?
         yield arr
       else
-        return arr
+        return arr.collect{|x| x.data}
       end
     else
       queue.push(queue[0].left) unless queue[0].left.nil?
       queue.push(queue[0].right) unless queue[0].right.nil?
       # p queue.collect{|x| x.data unless x.nil? }
-      arr<<queue.shift.data
+      arr<<queue.shift
       # puts "arr = #{arr}"
       return recu_level_order(curr, queue, arr, false)
     end
